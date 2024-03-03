@@ -1,19 +1,23 @@
-import { ethers } from "hardhat";
+import {ethers} from "hardhat";
 
 async function main() {
 
-  const lock = await ethers.deployContract("Lock");
+    const MyERC20 = await ethers.deployContract("MyERC20");
 
-  await lock.waitForDeployment();
+    await MyERC20.waitForDeployment();
 
-  console.log(
-    ` deployed to ${lock.target}`
-  );
+
+    const Airdrop = await ethers.deployContract("Airdrop", [9783, MyERC20.target]);
+
+    await Airdrop.waitForDeployment();
+
+    console.log(` deployed to ${Airdrop.target}`);
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
+    console.error(error);
+    process.exitCode = 1;
 });

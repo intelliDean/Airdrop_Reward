@@ -11,7 +11,7 @@ import "./IERC20.sol";
 import "./Err.sol";
 
 
-contract VRFv2Consumer is VRFConsumerBaseV2 {
+contract Airdrop is VRFConsumerBaseV2 {
 
     address owner;
     IERC20 immutable erc20;
@@ -86,7 +86,7 @@ contract VRFv2Consumer is VRFConsumerBaseV2 {
     event Airdrops(uint256 totalNumOfParticipants, uint256 totalAirdropsDistributed);
     event ClaimAirdrop(address claimer, uint256 _amount);
 
-    function onlyOwner() private {
+    function onlyOwner() private view  {
         if (msg.sender != owner) revert Err.ONLY_OWNER_IS_ALLOWED();
     }
 
